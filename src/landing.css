@@ -1,0 +1,78 @@
+html,
+#root {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(187, 102, 22);
+  color: rgb(255, 255, 255);
+}
+
+::-webkit-scrollbar {
+  visibility: hidden;
+}
+
+#window {
+  height: 100%;
+  width: 100%;
+}
+div {
+  border: none;
+}
+
+nav {
+  visibility: hidden;
+}
+
+.box {
+  border: 5px solid white;
+  border-radius: 250px;
+  display: block;
+  width: fit-content;
+  height: fit-content;
+  margin-top: 10%;
+  float: inline-start;
+  height: 500px;
+  width: 1450px;
+  transition: width 1.5s ease-in-out;
+  background: #ffffff;
+  font-family: monospace;
+  color:rgb(187, 102, 22);
+  margin-left: -250px;
+}
+
+h1 {
+  font-size: 4.5em;
+  margin-left: 50px;
+}
+
+.slide-right {
+  transform: translateX(calc(100vw + 250px));
+  transition: transform 1s ease-in-out;
+}
+
+button{
+  margin-top: 40px;
+  margin-left: 50px;
+  padding: 12px 30px;
+  font-size: 1.2em;
+  
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+}
+.one {
+  background-color: rgb(187, 102, 22);
+  color: white;
+  border: none;
+}
+.two{
+  background-color: white;
+  color:rgb(187, 102, 22);
+  border: 3px solid rgb(187, 102, 22);
+}
+
+button:hover {
+  transform: scale(1.1);
+}
+.box:hover {
+  width: calc(100vw + 500px);
+}

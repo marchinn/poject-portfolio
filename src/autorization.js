@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom";
-import Notes from "./notes";
 import "./App.css";
 
 function FillArea({ id, type, text }) {
@@ -11,19 +9,15 @@ function FillArea({ id, type, text }) {
   );
 }
 
-const tasks = ["проверить почту", "позвонить", "почитать"];
 function Autorization() {
   return (
     <div id="autorization">
-      <h1>Регистрация</h1>
+      <h1>Авторизация</h1>
 
-      <FillArea id="firstName" type="text" text="Имя" />
-      <FillArea id="secondName" type="text" text="Фамилия" />
-      <FillArea id="thirdName" type="text" text="Отчество (при наличии)" />
-      <FillArea id="birthday" type="date" text="Дата рождения" />
-      <FillArea id="number" type="text" text="Номер зачётки" />
+      <FillArea id="login" type="text" text="Логин" />
+      <FillArea id="password" type="text" text="Пароль" />
 
-      <Link to="/mypage">У меня уже есть аккаунт</Link>
+      <button className="link-style">У меня нет аккаунта</button>
     </div>
   );
 }
