@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "./App.css";
+import { useState } from "react";
+import "./userpage.css";
 
 function FillArea({ id, type, text }) {
   return (
@@ -19,25 +18,20 @@ function UserPage() {
 
   const modalContentClick = (e) => {
     e.stopPropagation();
-
     const achievements = [];
   };
 
   return (
-    <div>
-      <h1>UserPage</h1>
+    <div id="userpage">
+      <nav>
+        <link href="/mypage" text="Личный кабинет" />
+        <link href="/autorization"  text="Личный кабинет" />
+        <h1>UserPage</h1>
+      </nav>
 
-      <div className="wrapper">
-        <div className="half">
-          <div
-            className="photo"
-            style={{
-              width: "300px",
-              height: "500px",
-              backgroundColor: "grey",
-              margin: "0 auto",
-            }}
-          ></div>
+      <div className="wrapper-up">
+        <div className="half-up">
+          <div className="photo-up"></div>
           <h3>Фамилия</h3>
           <h3>Имя</h3>
           <h3>Отчество</h3>
@@ -45,13 +39,14 @@ function UserPage() {
           <h3>Номер зачётки</h3>
         </div>
 
-        <div className="half">
-          <div className="box">
+        <div className="half-up">
+          <div className="box-up">
+            <div className="box-in-box-up">
             <h3>Мои достижения</h3>
-            <button id="add_competition" onClick={openModal}>
+            <button id="add-competition" onClick={openModal}>
               Добавить
             </button>
-
+</div>
             <div className="field"></div>
 
             {isModalOpen && (
@@ -59,7 +54,7 @@ function UserPage() {
                 <div className="modal-content" onClick={modalContentClick}>
                   <FillArea id="competition" type="text" text="Конкурс" />
                   <FillArea
-                    id="date_competition"
+                    id="date-competition"
                     type="date"
                     text="Дата проведения"
                   />
@@ -69,14 +64,14 @@ function UserPage() {
             )}
           </div>
 
-          <div className="box">
+          <div className="box-up">
             <div>
               <h3>Загруженные файлы</h3>
               <input type="file" />
               <button>Загрузить</button>
             </div>
 
-            <div className="field"></div>
+            <div className="field-up"></div>
           </div>
         </div>
       </div>
