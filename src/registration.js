@@ -18,15 +18,16 @@ function Registration() {
   const [closeAnimate, setCloseAnimate] = useState(false);
 
   const [formData, setFormData] = useState({
-    firstName: "",
-    secondName: "",
-    thirdName: "",
-    birthday: "",
-    number: "",
-    create_login: "",
-    create_password: "",
+    first_name: "",
+    last_name: "",
+    third_name: "",
+    date_of_birth: "",
+    student_id_number: "",
+    login: "",
+    password: "",
   });
 
+  // Обработка изменения полей
   const handleChange = (e) => {
     const { id, value } = e.target;
     setFormData((prev) => ({
@@ -35,20 +36,24 @@ function Registration() {
     }));
   };
 
+  // Отправка формы на сервер
   const handleRegister = async () => {
     try {
-      const response = await fetch("http://localhost:3000/registration", {
+      const response = await fetch("http://localhost:8000/registration", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(formData),
       });
+
       if (response.ok) {
         const result = await response.json();
-        console.log("Успешно зарегистрирован:", result);
+        alert("Регистрация прошла успешно!");
+        navigate("/autorization");
       } else {
-        console.error("Ошибка регистрации");
+        const err = await response.json();
+        alert("Ошибка регистрации: " + err.detail);
       }
     } catch (err) {
       console.error("Сетевая ошибка:", err);
@@ -61,7 +66,6 @@ function Registration() {
 
   const handleClickAut = () => {
     setCloseAnimate(true);
-
     setTimeout(() => {
       navigate("/autorization");
     }, 1000);
@@ -77,52 +81,52 @@ function Registration() {
       <h1>Регистрация</h1>
       <div className="box-reg">
         <FillArea
-          id="firstName"
-          type="text"
-          text="Имя"
-          value={formData.firstName}
-          onChange={handleChange}
-        />
-        <FillArea
-          id="secondName"
+          id="last_name"
           type="text"
           text="Фамилия"
-          value={formData.secondName}
+          value={formData.last_name}
           onChange={handleChange}
         />
         <FillArea
-          id="thirdName"
+          id="first_name"
+          type="text"
+          text="Имя"
+          value={formData.first_name}
+          onChange={handleChange}
+        />
+        <FillArea
+          id="third_name"
           type="text"
           text="Отчество (при наличии)"
-          value={formData.thirdName}
+          value={formData.third_name}
           onChange={handleChange}
         />
         <FillArea
-          id="birthday"
+          id="date_of_birth"
           type="date"
           text="Дата рождения"
-          value={formData.birthday}
+          value={formData.date_of_birth}
           onChange={handleChange}
         />
         <FillArea
-          id="number"
+          id="student_id_number"
           type="text"
           text="Номер зачётки"
-          value={formData.number}
+          value={formData.student_id_number}
           onChange={handleChange}
         />
         <FillArea
-          id="create_login"
+          id="login"
           type="text"
-          text="Придумайте логин"
-          value={formData.create_login}
+          text="Логин"
+          value={formData.login}
           onChange={handleChange}
         />
         <FillArea
-          id="create_password"
+          id="password"
           type="password"
-          text="Придумайте пароль"
-          value={formData.create_password}
+          text="Пароль"
+          value={formData.password}
           onChange={handleChange}
         />
         <button onClick={handleRegister}>Создать аккаунт</button>

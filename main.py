@@ -6,12 +6,15 @@ import shutil, os
 from passlib.context import CryptContext
 from datetime import datetime, timedelta
 import jwt
-from ruinas_code.database import Session as DBSession, Base, engine, Student, Admin, Achievement
+
+from database import Session as DBSession, Base, engine, Student, Admin, Achievement
 from pydantic import BaseModel
 from datetime import date
-
 app = FastAPI()
-origins = ["http://locslhost:3000"]
+
+from fastapi.middleware.cors import CORSMiddleware
+
+origins = ["http://localhost:3000"]
 app.add_middleware(CORSMiddleware, 
                    allow_origins = origins, 
                    allow_methods = ["*"], 

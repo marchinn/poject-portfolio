@@ -3,7 +3,7 @@ from sqlalchemy.orm import declarative_base, relationship, sessionmaker
 
 # Подключение к SQLite-базе данных
 engine = create_engine(
-    "sqlite:///C:/ratra/Desktop/SQL/notes.db",  # Путь к файлу базы
+    "sqlite:///C:/Users/iminl/Documents/React Apps/my-app/notes.db",  # Путь к файлу базы
     echo=False,
     connect_args={"check_same_thread": False}
 )
@@ -22,7 +22,7 @@ class Student(Base):
     last_name = Column(String, nullable=False)       # Фамилия
     first_name = Column(String, nullable=False)      # Имя
     third_name = Column(String)                      # Отчество (необяз.)
-    date_of_birth = Date(String, nullable=False)   # Дата рождения
+    # date_of_birth = Date(String, nullable=False)   # Дата рождения
     student_id_number = Column(String, unique=True, nullable=False)  # Номер студенческого билета
     login = Column(String, unique=True, nullable=False)              # Придуманный логин
     password_hash = Column(String, nullable=False)                   # Хэш придуманного пароля
@@ -36,7 +36,7 @@ class Achievement(Base):
 
     id = Column(Integer, primary_key=True)
     title = Column(String, nullable=False)           # Название достижения
-    date_received = Date(String, nullable=False)   # Дата получения (в формате YYYY-MM-DD)
+    # date_received = Date(String, nullable=False)   # Дата получения (в формате YYYY-MM-DD)
     level = Column(String, nullable=False)           # Степень (например: «1 место», «участник», и т.п.)
     status = Column(String, nullable=False)         # Статус мероприятия (например: международный, всероссийский и т.п.)
     file_path = Column(String, nullable=False)       # Путь к файлу (PDF, фото и т.п.)
