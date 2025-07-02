@@ -1,6 +1,5 @@
-from sqlalchemy import Column, Integer, String, ForeignKey, DateTime, create_engine
+from sqlalchemy import Column, Integer, String, ForeignKey, Date, create_engine
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
-from datetime import datetime
 
 # Подключение к SQLite-базе данных
 engine = create_engine(
@@ -22,11 +21,11 @@ class Student(Base):
     id = Column(Integer, primary_key=True)
     last_name = Column(String, nullable=False)       # Фамилия
     first_name = Column(String, nullable=False)      # Имя
-    patronymic = Column(String)                      # Отчество (необяз.)
-    date_of_birth = Column(String, nullable=False)   # Дата рождения
-    student_id_number = Column(String, unique=True, nullable=False)  # Студбилет
+    third_name = Column(String)                      # Отчество (необяз.)
+    date_of_birth = Date(String, nullable=False)   # Дата рождения
+    student_id_number = Column(String, unique=True, nullable=False)  # Номер студенческого билета
     login = Column(String, unique=True, nullable=False)              # Придуманный логин
-    password = Column(String, nullable=False)                       # Придуманный пароль
+    password_hash = Column(String, nullable=False)                   # Хэш придуманного пароля
 
     # Один студент может иметь много достижений
     achievements = relationship("Achievement", back_populates="student")
@@ -37,8 +36,9 @@ class Achievement(Base):
 
     id = Column(Integer, primary_key=True)
     title = Column(String, nullable=False)           # Название достижения
-    date_received = Column(String, nullable=False)   # Дата получения (в формате YYYY-MM-DD)
+    date_received = Date(String, nullable=False)   # Дата получения (в формате YYYY-MM-DD)
     level = Column(String, nullable=False)           # Степень (например: «1 место», «участник», и т.п.)
+    status = Column(String, nullable=False)         # Статус мероприятия (например: международный, всероссийский и т.п.)
     file_path = Column(String, nullable=False)       # Путь к файлу (PDF, фото и т.п.)
 
     # Привязка к студенту
@@ -51,7 +51,7 @@ class Admin(Base):
 
     id = Column(Integer, primary_key=True)
     login = Column(String, unique=True, nullable=False)  # Логин
-    password = Column(String, nullable=False)            # Пароль
+    password_hash = Column(String, nullable=False)       # Хэш пароля
 
 # Функция создания базы и базового админа
 def init_db():
@@ -60,7 +60,7 @@ def init_db():
     session = Session()
     # Добавляем админа, если его нет
     if not session.query(Admin).first():
-        admin = Admin(login="admin", password="admin123")  # Заранее заданные данные
+        admin = Admin(login="admin", password="admin")  # Заранее заданные данные
         session.add(admin)
         session.commit()
     session.close()
