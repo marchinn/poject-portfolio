@@ -3,7 +3,7 @@ from pydantic import BaseModel
 from datetime import date
 
 from sqlalchemy.dialects.mysql import DATETIME
-from starlette.middleware.cors import CORSMiddleware
+from starlette.middleware.cors import CORSMiddleware # type: ignore
 
 app = FastAPI()
 
