@@ -22,6 +22,7 @@ class Student(Base):
     last_name = Column(String, nullable=False)       # Фамилия
     first_name = Column(String, nullable=False)      # Имя
     third_name = Column(String)                      # Отчество (необяз.)
+    image = Column(String, nullable=False)       # Путь к аватарке (фото)
     date_of_birth = Date(String, nullable=False)   # Дата рождения
     student_id_number = Column(String, unique=True, nullable=False)  # Номер студенческого билета
     login = Column(String, unique=True, nullable=False)              # Придуманный логин
