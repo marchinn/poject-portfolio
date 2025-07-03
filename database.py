@@ -1,5 +1,6 @@
 from sqlalchemy import Column, Integer, String, ForeignKey, Date, create_engine
 from sqlalchemy.orm import declarative_base, relationship, sessionmaker
+from datetime import date
 
 # Подключение к SQLite-базе данных (файл notes.db в текущей директории)
 engine = create_engine(
@@ -47,3 +48,25 @@ class Admin(Base):
     id = Column(Integer, primary_key=True)
     login = Column(String, unique=True, nullable=False)
     password_hash = Column(String, nullable=False)
+
+# Создание аккаунта администратора
+admin = Admin(
+    login="admin",
+    password_hash="admin123"
+)
+
+# Создание студента
+student = Student(
+    last_name="Иванов",
+    first_name="Иван",
+    third_name="Иванович",
+    date_of_birth=date(2000, 5, 15),
+    student_id_number="A123456",
+    login="ivanov_student",
+    password_hash="student123"
+)
+
+# Добавление в сессию и коммит
+Session.add(admin)
+Session.add(student)
+Session.commit()
