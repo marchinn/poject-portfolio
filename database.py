@@ -49,24 +49,24 @@ class Admin(Base):
     login = Column(String, unique=True, nullable=False)
     password_hash = Column(String, nullable=False)
 
-# Создание аккаунта администратора
-admin = Admin(
-    login="admin",
-    password_hash="admin123"
-)
+# # Создание аккаунта администратора
+# admin = Admin(
+#     login="admin",
+#     password_hash="admin123"
+# )
 
-# Создание студента
-student = Student(
-    last_name="Иванов",
-    first_name="Иван",
-    third_name="Иванович",
-    date_of_birth=date(2000, 5, 15),
-    student_id_number="A123456",
-    login="ivanov_student",
-    password_hash="student123"
-)
+# # Создание студента
+# student = Student(
+#     last_name="Иванов",
+#     first_name="Иван",
+#     third_name="Иванович",
+#     date_of_birth=date(2000, 5, 15),
+#     student_id_number="A123456",
+#     login="ivanov_student",
+#     password_hash="student123"
+# )
 
-# Добавление в сессию и коммит
-Session.add(admin)
-Session.add(student)
-Session.commit()
+# # Добавление в сессию и коммит
+# Session.add(admin)
+# Session.add(student)
+# Session.commit()
