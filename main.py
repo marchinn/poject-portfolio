@@ -116,19 +116,20 @@ def get_current_user(credentials: HTTPAuthorizationCredentials = Depends(bearer_
     return user
 
 # 1. Регистрация студента
+
 @app.post("/registration", response_model=StudentOut)
 def register_student(student: StudentCreate):
     db = DBSession()
     # Проверяем, что логин не занят
     if db.query(Student).filter(Student.login == student.login).first():
         db.close()
-        raise HTTPException(status_code=400, detail="Login already registered")
+        raise HTTPException(status_code=400, detail="Логин")
     hashed_pw = get_password_hash(student.password)
     new_student = Student(
         first_name=student.first_name, last_name=student.last_name,
         third_name=student.third_name, date_of_birth=student.date_of_birth,
         student_id_number=student.student_id_number, login=student.login,
-        password_hash=hashed_pw, image=""  # аватарка не используется
+        password_hash=hashed_pw, image=""
     )
     db.add(new_student)
     db.commit()

@@ -24,14 +24,16 @@ function UserPage() {
   return (
     <div id="userpage">
       <nav>
-        <link href="/mypage" text="Личный кабинет" />
-        <link href="/autorization"  text="Личный кабинет" />
         <h1>UserPage</h1>
+        <div className="flex"></div>
+        <a href="/autorization">Выйти</a>
       </nav>
 
       <div className="wrapper-up">
         <div className="half-up">
-          <div className="photo-up"></div>
+          <div className="photo-up">
+            <input type="file" />
+          </div>
           <h3>Фамилия</h3>
           <h3>Имя</h3>
           <h3>Отчество</h3>
@@ -42,11 +44,11 @@ function UserPage() {
         <div className="half-up">
           <div className="box-up">
             <div className="box-in-box-up">
-            <h3>Мои достижения</h3>
-            <button id="add-competition" onClick={openModal}>
-              Добавить
-            </button>
-</div>
+              <h3>Мои достижения</h3>
+              <button id="add-competition" onClick={openModal}>
+                Добавить
+              </button>
+            </div>
             <div className="field"></div>
 
             {isModalOpen && (
@@ -65,13 +67,12 @@ function UserPage() {
           </div>
 
           <div className="box-up">
-            <div>
+            <div className="box-in-box-up">
               <h3>Загруженные файлы</h3>
               <input type="file" />
               <button>Загрузить</button>
             </div>
-
-            <div className="field-up"></div>
+            <div className="field"></div>
           </div>
         </div>
       </div>

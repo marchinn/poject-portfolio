@@ -31,7 +31,7 @@ function Autorization() {
 
   const handleLogin = async () => {
     try {
-      const response = await fetch("http://localhost:3000/api/autorization", {
+      const response = await fetch("http://localhost:3000/autorization", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
