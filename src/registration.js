@@ -39,7 +39,7 @@ function Registration() {
   // Отправка формы на сервер
   const handleRegister = async () => {
     try {
-      const response = await fetch("http://localhost:3000/registration", {
+      const response = await fetch("http://localhost:8000/registration", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,6 +57,7 @@ function Registration() {
       }
     } catch (err) {
       console.error("Сетевая ошибка:", err);
+      alert("Ошибка сети. Попробуйте позже.");
     }
   };
 
