@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./App.css";
 
-function FillArea({ id, type, text, value, onChange}) {
+function FillArea({ id, type, text, value, onChange }) {
   return (
     <div>
       <h3>{text}</h3>
@@ -22,33 +22,31 @@ function Autorization() {
     password: "",
   });
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    setLoginData((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
+    setLoginData({ ...loginData, [e.target.id]: e.target.value });
   };
 
-  const handleLogin = async () => {
+  async function handleLogin() {
+    const formData = new FormData();
+    formData.append("login", loginData.login);
+    formData.append("password", loginData.password);
+console.log(formData)
     try {
       const response = await fetch("http://localhost:8000/autorization", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(loginData),
+        body: formData,
       });
 
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Успешный вход:", result);
-      } else {
-        console.error("Ошибка входа");
+      if (!response.ok) {
+        console.log("Ответ сервера:", response.status); // <--- Добавь
+        throw new Error("Ошибка: " + response.status);
       }
-    } catch (err) {
-      console.error("Сетевая ошибка:", err);
+
+      const data = await response.json();
+      console.log("Успешно:", data);
+    } catch (error) {
+      console.error("Ошибка запроса:", error);
     }
-  };
+  }
 
   useEffect(() => {
     setAnimate(true);

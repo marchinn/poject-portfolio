@@ -24,41 +24,27 @@ function Registration() {
     date_of_birth: "",
     student_id_number: "",
     login: "",
-    password: "",
+    password: ""
   });
 
   // Обработка изменения полей
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [id]: value,
-    }));
+    setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
   // Отправка формы на сервер
   const handleRegister = async () => {
-    try {
-      const response = await fetch("http://localhost:8000/registration", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        alert("Регистрация прошла успешно!");
-        navigate("/autorization");
-      } else {
-        const err = await response.json();
-        alert("Ошибка регистрации: " + err.detail);
-      }
-    } catch (err) {
-      console.error("Сетевая ошибка:", err);
-      alert("Ошибка сети. Попробуйте позже.");
-    }
+    console.log("formData перед отправкой:", formData);
+    fetch("http://localhost:8000/registration", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({formData}),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log("Ответ от сервера:", data))
+      .catch((err) => console.error("Ошибка запроса:", err));
   };
 
   useEffect(() => {
