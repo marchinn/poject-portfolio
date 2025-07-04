@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from database import Base, engine, Student
+from database import Session as DBSession, Base, engine, Student
 from pydantic import BaseModel
 from datetime import date
 app = FastAPI()
@@ -38,7 +38,7 @@ class StudentOut(BaseModel):
 
 @app.post("/registration", response_model=StudentOut)
 def register_student(student: StudentCreate):
-    print("Полученные данные:", student())
+    print("Полученные данные:", student)
     db = DBSession()
     new_student = Student(
         first_name=student.first_name,
